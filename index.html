@@ -23,7 +23,7 @@
 
     <header class="header">
         <div class="wrap nav">
-            <a class="brand" href="#home">QVL</a>
+            <a class="brand" href="#home">VLQ</a>
             <nav aria-label="Primary">
                 <ul class="menu" id="menu">
                     <li><a href="#home" class="active">Home</a></li>
@@ -31,7 +31,15 @@
                     <li><a href="#skills">Skills</a></li>
                     <li><a href="#experience">Experience</a></li>
                     <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li class="has-sub">
+                        <a href="#contact" aria-haspopup="true" aria-expanded="false">Contact</a>
+                        <ul class="sub" role="menu">
+                            <a role="menuitem" href="https://www.linkedin.com/in/timvu2003" target="_blank"
+                                    rel="me noopener noreferrer">LinkedIn</a>
+                            <a role="menuitem" href="https://github.com/RealTimGFM" target="_blank"
+                                    rel="me noopener noreferrer">GitHub</a>
+                        </ul>
+                    </li>
                     <li><button id="themeToggle" class="btn" type="button" aria-pressed="false">Light</button></li>
                     <li>
                         <a class="btn tooltip" href="assets/QuyVuLuong_CV.pdf" download

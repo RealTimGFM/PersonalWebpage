@@ -145,3 +145,16 @@ mql.addEventListener('change', e => {
     }
 });
 if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
+
+// Contact dropdown aria state
+const contactItem = document.querySelector('.menu .has-sub');
+if (contactItem) {
+  const trigger = contactItem.querySelector('a[href="#contact"]');
+  const set = (open) => trigger && trigger.setAttribute('aria-expanded', String(open));
+  contactItem.addEventListener('mouseenter', () => set(true));
+  contactItem.addEventListener('mouseleave', () => set(false));
+  contactItem.addEventListener('focusin',  () => set(true));
+  contactItem.addEventListener('focusout', (e) => {
+    if (!contactItem.contains(document.activeElement)) set(false);
+  });
+}

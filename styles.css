@@ -627,3 +627,50 @@ button.is-loading {
     opacity: .7;
     pointer-events: none;
 }
+/* Contact dropdown — no vertical gap, no Y-translate */
+.menu .has-sub{ position:relative; }
+.menu .sub{
+  position:absolute;
+  top: 130%;                 /* sit right under the parent */
+  left:50%;
+  transform: translateX(-50%);   /* no vertical translate */
+  margin-top: 6px;                /* small visual offset */
+  display:grid; gap:6px;
+  min-width: 180px;
+  padding:10px 12px;
+  border:3px solid var(--paper);
+  border-radius:12px;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  opacity:0; pointer-events:none;
+  transition: opacity .15s ease;  /* remove Y-movement so there’s no gap to cross */
+  z-index: 60;
+}
+
+/* Invisible hover bridge so the cursor can travel down without leaving hover */
+.menu .has-sub::after{
+  content:"";
+  position:absolute;
+  left:0; right:0;
+  top:100%;
+  height: 14px;              /* adjust if you like more buffer */
+}
+
+/* show on hover or keyboard focus */
+.menu .has-sub:hover .sub,
+.menu .has-sub:focus-within .sub{
+  opacity:1; pointer-events:auto;
+}
+
+/* submenu links style */
+.menu .sub a{
+  color: var(--text);
+  font-weight:800;
+  padding:6px 8px;
+  border-radius:8px;
+  display:block;
+}
+.menu .sub a:hover{ background: color-mix(in srgb, var(--bg), white 6%); }
+
+/* keep gradient underline OFF for submenu items */
+.header .menu .sub a::after{ content:none !important; }
