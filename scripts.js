@@ -35,21 +35,83 @@ const revealIO = new IntersectionObserver(
 );
 document.querySelectorAll('.observe').forEach(el => revealIO.observe(el));
 
-//  Contact form (demo only) 
+
+
+
+
+
+
+
+// ===== Contact form (EmailJS) =====
 const form = document.getElementById('contactForm');
 const status = document.getElementById('status');
+
+const EMAILJS_SERVICE_ID = 'service_nadr8zr';
+const EMAILJS_TEMPLATE_ID = 'template_8e39ouv';
+const EMAILJS_PUBLIC_KEY = 'MBOb696Mp80gE40Rf';
+
 if (form) {
-    form.addEventListener('submit', e => {
+    // mark when the user started typing (anti-bot timing check)
+    let firstInteractionAt = 0;
+    form.addEventListener('input', () => { if (!firstInteractionAt) firstInteractionAt = Date.now(); }, { once: true });
+
+    // init EmailJS once
+    if (window.emailjs && !window.__emailjs_inited) {
+        emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+        window.__emailjs_inited = true;
+    }
+
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
+        status.textContent = '';
+
         const data = Object.fromEntries(new FormData(form));
-        if (!data.name || !data.email || !data.message) {
-            status.textContent = 'Please fill in all fields.';
-            return;
+        const name = (data.name || '').trim();
+        const email = (data.email || '').trim();
+        const message = (data.message || '').trim();
+        const honeypot = (data.website || '').trim();
+
+        // basic anti-bot checks
+        const tookMs = Date.now() - (firstInteractionAt || Date.now());
+        if (honeypot || tookMs < 1200) return;               // ignore bots
+        if (!name || !email || !message) {
+            status.textContent = 'Please fill in all fields.'; return;
         }
-        status.textContent = 'Thanks! Your message has been staged locally (phase 1).';
-        form.reset();
+
+        const btn = form.querySelector('button[type="submit"]');
+        btn?.setAttribute('disabled', 'true');
+        btn?.classList.add('is-loading');
+
+        try {
+            await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+                // what your template renders
+                name,                          // for {{name}}
+                email,                         // for {{email}}
+                message,                       // for {{message}}
+                time: new Date().toLocaleString(), // for {{time}} if you use it
+
+                // helpful mail headers (optional but nice)
+                from_name: name,
+                from_email: email,
+                reply_to: email
+            });
+
+            status.style.color = '#79e27d';
+            status.textContent = 'Thanks! Your message has been sent.';
+            form.reset();
+            firstInteractionAt = 0;
+        } catch (err) {
+            console.error(err);
+            status.style.color = '#ff9b9b';
+            status.textContent = 'Oops, failed to send. Please try again.';
+        } finally {
+            btn?.removeAttribute('disabled');
+            btn?.classList.remove('is-loading');
+        }
     });
 }
+
+
 //  Theme (Light/Dark) 
 const root = document.documentElement;
 const themeBtn = document.getElementById('themeToggle');

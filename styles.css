@@ -136,19 +136,24 @@ hr,
     opacity: 1
 }
 
-.menu a:not(.btn):not(.tooltip)::after{
-  content:"";
-  position:absolute;
-  left:0; right:0; bottom:-8px;
-  height:3px;
-  transform:scaleX(0);
-  transform-origin:left;
-  transition:transform .22s ease;
-  background:linear-gradient(90deg,var(--violet),var(--aqua),var(--yellow));
-  box-shadow:0 6px 14px rgba(255,210,77,.35);
+.menu a:not(.btn):not(.tooltip)::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -8px;
+    height: 3px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .22s ease;
+    background: linear-gradient(90deg, var(--violet), var(--aqua), var(--yellow));
+    box-shadow: 0 6px 14px rgba(255, 210, 77, .35);
 }
+
 .menu a:not(.btn):hover::after,
-.menu a:not(.btn).active::after{ transform:scaleX(1); }
+.menu a:not(.btn).active::after {
+    transform: scaleX(1);
+}
 
 
 .btn {
@@ -552,49 +557,73 @@ html[data-theme="light"] .header .menu a:not(.btn).active {
 }
 
 /* --- Tooltip for the Resume button --- */
-.tooltip{ position:relative; }
+.tooltip {
+    position: relative;
+}
+
+/* contact submit loading state (optional) */
+button.is-loading {
+    opacity: .7;
+    pointer-events: none;
+}
 
 /* bubble (now positioned under the button) */
-.tooltip[data-tip]::after{
-  content: attr(data-tip);
-  position:absolute;
-  left:50%;
-  top: calc(100% + 20px);        /* ⬅ below the button */
-  bottom:auto;
-  transform: translateX(-50%) translateY(-6px) scale(.98);
-  background:#0b0e12;
-  color:#fff;
-  padding:8px 12px;
-  border-radius:10px;
-  font-weight:800;
-  white-space:nowrap;
-  opacity:0;
-  transition: opacity .15s ease, transform .15s ease;
-  z-index:100;
+.tooltip[data-tip]::after {
+    content: attr(data-tip);
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 20px);
+    /* ⬅ below the button */
+    bottom: auto;
+    transform: translateX(-50%) translateY(-6px) scale(.98);
+    background: #0b0e12;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-weight: 800;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity .15s ease, transform .15s ease;
+    z-index: 100;
 }
 
 /* little arrow pointing UP toward the button */
-.tooltip[data-tip]::before{
-  content:"";
-  position:absolute;
-  left:50%;
-  top: calc(100% + 2px);         /* ⬅ just under the button */
-  bottom:auto;
-  transform: translateX(-50%) translateY(-6px);
-  width:0; height:0;
-  border-left:8px solid transparent;
-  border-right:8px solid transparent;
-  border-bottom:20px solid #0b0e12;  /* ⬅ triangle pointing up */
-  opacity:0;
-  transition: opacity .15s ease, transform .15s ease;
-  z-index:100;
+.tooltip[data-tip]::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 2px);
+    /* ⬅ just under the button */
+    bottom: auto;
+    transform: translateX(-50%) translateY(-6px);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 20px solid #0b0e12;
+    /* ⬅ triangle pointing up */
+    opacity: 0;
+    transition: opacity .15s ease, transform .15s ease;
+    z-index: 100;
 }
 
 /* show on hover or keyboard focus */
 .tooltip:hover::after,
 .tooltip:hover::before,
 .tooltip:focus-visible::after,
-.tooltip:focus-visible::before{
-  opacity:1;
-  transform: translateX(-50%) translateY(0) scale(1);
+.tooltip:focus-visible::before {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+}
+
+/* hide honeypot */
+.hp {
+    position: absolute !important;
+    left: -5000px !important;
+}
+
+/* contact submit loading state */
+button.is-loading {
+    opacity: .7;
+    pointer-events: none;
 }
