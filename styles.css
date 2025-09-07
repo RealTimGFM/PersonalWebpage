@@ -855,3 +855,7 @@ button.is-loading {
   /* compact theme toggle only on mobile */
   #themeToggle{ width:auto; display:inline-flex; padding:8px 14px; }
 }
+
+html[data-theme="dark"] #contact .btn {
+  color: #fff !important;      /* make text white */
+}
