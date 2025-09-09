@@ -546,38 +546,7 @@ section {
     box-shadow: var(--shadow-sm);
 }
 
-html[data-theme="light"] .header .menu a:not(.btn) {
-    color: #fff;
-    opacity: 1;
-}
-
-html[data-theme="light"] .header .menu a:not(.btn):hover,
-html[data-theme="light"] .header .menu a:not(.btn).active {
-    color: #fff;
-}
-
-html[data-theme="light"] .header .menu>li>a:not(.btn) {
-    color: #fff;
-    opacity: 1;
-}
-
-html[data-theme="light"] .header .menu>li>a:not(.btn):hover,
-html[data-theme="light"] .header .menu>li>a:not(.btn).active {
-    color: #fff;
-}
-
-/* Light mode: dropdown items (LinkedIn/GitHub) black */
-html[data-theme="light"] .header .menu .sub a {
-    color: #0b0e12;
-}
-
-html[data-theme="light"] .header .menu .sub a,
-html[data-theme="light"] .header .menu .sub a:hover,
-html[data-theme="light"] .header .menu .sub a:focus,
-html[data-theme="light"] .header .menu .sub a:active {
-    color: #0b0e12 !important;
-}
-
+[data-theme="light"] .menu a { color: var(--ink); }
 /* --- Tooltip for the Resume button --- */
 .tooltip {
     position: relative;
