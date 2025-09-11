@@ -174,3 +174,8 @@ if (navToggle && menuEl) {
         }
     });
 }
+function detectInitialTheme() {
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light' || saved === 'dark') return saved;
+  return 'light'; // default to light when nothing saved
+}
